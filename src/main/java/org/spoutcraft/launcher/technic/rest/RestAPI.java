@@ -38,6 +38,7 @@ import java.util.logging.Level;
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.spoutcraft.launcher.Settings;
 import org.spoutcraft.launcher.api.Launcher;
 import org.spoutcraft.launcher.exceptions.RestfulAPIException;
@@ -90,6 +91,21 @@ public class RestAPI {
 		}
 
 		return TECHNIC;
+	}
+
+	public static List<RestNews> getNews() throws RestfulAPIException {
+		InputStream stream = null;
+		String url = "http://api.betterver.se/announcements.json.php";
+		try {
+			stream = new URL(url).openStream();
+			List<RestNews> result = mapper.readValue(stream, new TypeReference<List<RestNews>>() { });
+
+			return result;
+		} catch (IOException e) {
+			throw new RestfulAPIException("Error accessing URL [" + url + "]", e);
+		} finally {
+			IOUtils.closeQuietly(stream);
+		}
 	}
 
 	public String getRestURL() {
