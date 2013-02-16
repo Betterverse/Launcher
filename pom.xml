@@ -348,6 +348,7 @@
 				</os>
 			</activation>
 			<build>
+				<finalName>${artifactId}</finalName>
 				<plugins>
 					<plugin>
 						<groupId>org.bluestemsoftware.open.maven.plugin</groupId>
