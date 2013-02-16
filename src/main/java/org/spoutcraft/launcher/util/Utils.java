@@ -99,7 +99,7 @@ public class Utils {
 			}
 
 			if (!exists) {
-				int result = JOptionPane.showConfirmDialog(splash, "No installation of technic found. Technic Launcher will install at: " + workDir.getAbsolutePath() + " Would you like to change the install directory?", "Install Technic Launcher", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				int result = JOptionPane.showConfirmDialog(splash, "No installation of our launcher found. Will install at: " + workDir.getAbsolutePath() + " Would you like to change the install directory?", "Install Technic Launcher", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (result == JOptionPane.YES_OPTION) {
 					JFileChooser fileChooser = new JFileChooser(workDir);
 					fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
