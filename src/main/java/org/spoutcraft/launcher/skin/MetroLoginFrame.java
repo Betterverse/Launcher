@@ -276,28 +276,28 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		exit.addActionListener(this);
 
 		// Steam button
-		JButton steam = new ImageHyperlinkButton("http://steamcommunity.com/groups/technic-pack");
+		JButton steam = new ImageHyperlinkButton("http://steamcommunity.com/groups/betterverse");
 		steam.setRolloverIcon(getIcon("steamInverted.png", 28, 28));
 		steam.setToolTipText("Game with us on Steam");
 		steam.setBounds(6, 6, 28, 28);
 		setIcon(steam, "steam.png", 28);
 
 		// Twitter button
-		JButton twitter = new ImageHyperlinkButton("https://twitter.com/TechnicPack");
+		JButton twitter = new ImageHyperlinkButton("https://twitter.com/TheBetterverse");
 		twitter.setRolloverIcon(getIcon("twitterInverted.png", 28, 28));
 		twitter.setToolTipText("Follow us on Twitter");
 		twitter.setBounds(6 + 34 * 3, 6, 28, 28);
 		setIcon(twitter, "twitter.png", 28);
 
 		// Facebook button
-		JButton facebook = new ImageHyperlinkButton("https://www.facebook.com/TechnicPack");
+		JButton facebook = new ImageHyperlinkButton("https://www.facebook.com/TheBetterverse");
 		facebook.setRolloverIcon(getIcon("facebookInverted.png", 28, 28));
 		facebook.setToolTipText("Like us on Facebook");
 		facebook.setBounds(6 + 34 * 2, 6, 28, 28);
 		setIcon(facebook, "facebook.png", 28);
 
 		// YouTube button
-		JButton youtube = new ImageHyperlinkButton("http://www.youtube.com/user/kakermix");
+		JButton youtube = new ImageHyperlinkButton("http://www.youtube.com/user/betterverseinfo");
 		youtube.setRolloverIcon(getIcon("youtubeInverted.png", 28, 28));
 		youtube.setToolTipText("Subscribe to our videos");
 		youtube.setBounds(6 + 34, 6, 28, 28);
