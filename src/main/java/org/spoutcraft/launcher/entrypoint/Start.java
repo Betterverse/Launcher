@@ -72,17 +72,18 @@ public class Start {
 		}
 
 		Utils.getLauncherDirectory();
-		int version = Integer.parseInt(SpoutcraftLauncher.getLauncherBuild());
-		String buildStream = Settings.getBuildStream();
-		int latest = RestAPI.getLatestLauncherBuild(buildStream);
+//		int version = Integer.parseInt(SpoutcraftLauncher.getLauncherBuild());
+//		String buildStream = Settings.getBuildStream();
+		int latest = 0;
+//		int latest = RestAPI.getLatestLauncherBuild(buildStream);
 		boolean update = false;
-		
-		if (buildStream.equals("beta") && version < latest) {
-			update = true;
-		} else if (buildStream.equals("stable") && version != latest) {
-			update = true;
-		}
-		
+
+//		if (buildStream.equals("beta") && version < latest) {
+//			update = true;
+//		} else if (buildStream.equals("stable") && version != latest) {
+//			update = true;
+//		}
+
 		if (update) {
 			File codeSource = new File(Start.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 			File temp;
