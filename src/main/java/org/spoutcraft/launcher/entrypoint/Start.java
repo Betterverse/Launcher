@@ -33,7 +33,6 @@ import java.util.Arrays;
 
 import javax.swing.UIManager;
 
-import org.spoutcraft.launcher.Settings;
 import org.spoutcraft.launcher.technic.rest.RestAPI;
 import org.spoutcraft.launcher.util.Download;
 import org.spoutcraft.launcher.util.DownloadListener;

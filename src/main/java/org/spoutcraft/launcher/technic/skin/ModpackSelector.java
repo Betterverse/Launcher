@@ -52,7 +52,7 @@ import org.spoutcraft.launcher.util.Utils;
 public class ModpackSelector extends JComponent implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String PACK_SELECT_ACTION = "packselect";
-	public static final String DEFAULT_PACK = "tekkitlite";
+	public static final String DEFAULT_PACK = "vanilla";
 	private ImportOptions importOptions = null;
 
 	private final MetroLoginFrame frame;

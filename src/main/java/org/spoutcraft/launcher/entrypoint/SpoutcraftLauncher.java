@@ -159,7 +159,6 @@ public class SpoutcraftLauncher {
 		PackManager.loadPack(selector.getPackMap(), lastPack);
 
 		PackManager.addRestPacks(selector);
-		PackManager.addCustomPacks(selector);
 
 		try {
 			System.out.println(RestAPI.getNews());

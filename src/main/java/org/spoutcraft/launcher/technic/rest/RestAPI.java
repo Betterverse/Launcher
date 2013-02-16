@@ -30,7 +30,7 @@ package org.spoutcraft.launcher.technic.rest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -77,12 +77,16 @@ public class RestAPI {
 	}
 
 	public static Set<String> getDefaults() {
-		Modpacks packs = getDefault().getModpacks();
-		if (packs != null) {
-			return packs.getMap().keySet();
-		} else {
-			return Collections.emptySet();
-		}
+//		Modpacks packs = getDefault().getModpacks();
+//		if (packs != null) {
+//			return packs.getMap().keySet();
+//		} else {
+//			return Collections.emptySet();
+//		}
+		Set<String> defaults = new HashSet<String>(1);
+		defaults.add("vanilla");
+		defaults.add("tekkitlite");
+		return defaults;
 	}
 
 	public static RestAPI getDefault() {
@@ -220,12 +224,12 @@ public class RestAPI {
 		TechnicMD5 result = getRestObject(TechnicMD5.class, getModpackMD5URL(modpack));
 		return result.getMD5();
 	}
-	
+
 	public static int getLatestLauncherBuild(String stream) throws RestfulAPIException {
 		LauncherBuild result = getRestObject(LauncherBuild.class, "http://beta.technicpack.net/api/launcher/version/" + stream);
 		return result.getLatestBuild();
 	}
-	
+
 	public static String getLauncherDownloadURL(int version, Boolean isJar) throws RestfulAPIException {
 		String ext = null;
 		if (isJar) {

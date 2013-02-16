@@ -39,10 +39,6 @@ public class PackManager {
 	public static void initPacks(ModpackSelector selector) {
 		PackMap packs = selector.getPackMap();
 		for (String pack : Settings.getInstalledPacks()) {
-			// Skip custom packs at first
-			if (Settings.isPackCustom(pack)) {
-				continue;
-			}
 			initPack(packs, pack);
 		}
 
@@ -50,14 +46,6 @@ public class PackManager {
 			for (String pack : RestAPI.getDefaults()) {
 				initPack(packs, pack);
 			}
-		}
-
-		for (String pack : Settings.getInstalledPacks()) {
-			// Skip non custom packs now
-			if (!Settings.isPackCustom(pack)) {
-				continue;
-			}
-			initPack(packs, pack);
 		}
 	}
 
