@@ -59,9 +59,6 @@ public class PackManager {
 			}
 			initPack(packs, pack);
 		}
-
-		// Add in the add pack button
-		packs.put("addpack", new AddPack());
 	}
 
 	public static void initPack(PackMap packs, String pack) {

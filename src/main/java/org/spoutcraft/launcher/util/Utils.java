@@ -77,7 +77,7 @@ public class Utils {
 
 	public static File getLauncherDirectory() {
 		if (workDir == null) {
-			workDir = getWorkingDirectory("technic");
+			workDir = getWorkingDirectory("betterverse");
 			boolean exists = workDir.exists();
 			if (!exists && !workDir.mkdirs()) {
 				throw new RuntimeException("The working directory could not be created: " + workDir);
