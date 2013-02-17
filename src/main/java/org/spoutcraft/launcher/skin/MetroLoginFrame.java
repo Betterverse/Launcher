@@ -307,7 +307,7 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 
 		// Pack Selector
 		packSelector = new ModpackSelector(this);
-		packSelector.setBounds(0, (FRAME_HEIGHT / 2) - 85, FRAME_WIDTH, 170);
+		packSelector.setBounds(0, 0, 200, 520);
 		
 		// Custom Pack Name Label
 		customName = new JLabel("", JLabel.CENTER);
@@ -338,14 +338,14 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 			userButtons.put(userName, userButton);
 		}
 
-		contentPane.add(switchLeft);
-		contentPane.add(switchRight);
+//		contentPane.add(switchLeft);
+//		contentPane.add(switchRight);
 		contentPane.add(customName);
 		contentPane.add(packOptionsBtn);
-		contentPane.add(packRemoveBtn);
-		contentPane.add(platform);
+//		contentPane.add(packRemoveBtn);
+//		contentPane.add(platform);
 		contentPane.add(packSelector);
-		contentPane.add(selectorBackground);
+//		contentPane.add(selectorBackground);
 		contentPane.add(name);
 		contentPane.add(pass);
 		contentPane.add(remember);
@@ -354,10 +354,10 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		contentPane.add(twitter);
 		contentPane.add(facebook);
 		contentPane.add(youtube);
-		contentPane.add(forums);
-		contentPane.add(donate);
+//		contentPane.add(forums);
+//		contentPane.add(donate);
 		contentPane.add(logo);
-		contentPane.add(loginStrip);
+//		contentPane.add(loginStrip);
 		contentPane.add(options);
 		contentPane.add(exit);
 		contentPane.add(progressBar);
