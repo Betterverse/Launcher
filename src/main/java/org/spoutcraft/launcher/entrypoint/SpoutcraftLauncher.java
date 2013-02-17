@@ -160,10 +160,11 @@ public class SpoutcraftLauncher {
 		PackManager.addRestPacks(selector);
 
 		try {
-			System.out.println(RestAPI.getNews());
+			RestAPI.getNews().get(0).updateNewsPane(frame.getNews());
 		} catch (RestfulAPIException e) {
 			e.printStackTrace();
 		}
+
 		if (params.hasAccount()) {
 			frame.disableForm();
 			frame.doLogin(params.getUser(), params.getPass());

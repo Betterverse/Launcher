@@ -59,11 +59,11 @@ public class ModpackSelector extends JComponent implements ActionListener {
 	private final List<PackButton> buttons = new ArrayList<PackButton>(7);
 
 	private final int height = 520;
-	private final int width = 200;
+//	private final int width = 200;
 	private final int bigWidth = 180;
 	private final int bigHeight = 110;
 	private final float smallScale = 0.7F;
-	private final int spacing = 15;
+	private final int spacing = 8;
 	private final int smallWidth = (int) (bigWidth * smallScale);
 	private final int smallHeight = (int) (bigHeight * smallScale);
 	private final int bigX = 100 - (bigWidth / 2);

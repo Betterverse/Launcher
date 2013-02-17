@@ -26,6 +26,7 @@
  */
 package org.spoutcraft.launcher.technic.rest;
 
+import javax.swing.JTextArea;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class RestNews extends RestObject {
@@ -51,6 +52,12 @@ public class RestNews extends RestObject {
 
 	public String getMessage() {
 		return message;
+	}
+
+	public void updateNewsPane(JTextArea news) {
+		String newMessage = message.replaceAll("\\[([A-Za-z0-9\\/=:.?&-]+)]", "");
+		news.setText(newMessage);
+//		news.repaint();
 	}
 
 	public long getTime() {
