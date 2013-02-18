@@ -28,7 +28,14 @@ package org.spoutcraft.launcher.skin;
 
 import static org.spoutcraft.launcher.util.ResourceUtils.getResourceAsStream;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FocusTraversalPolicy;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,14 +49,24 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import net.minecraft.Launcher;
 
 import org.spoutcraft.launcher.Settings;
+import org.spoutcraft.launcher.exceptions.RestfulAPIException;
 import org.spoutcraft.launcher.skin.components.BackgroundImage;
 import org.spoutcraft.launcher.skin.components.DynamicButton;
 import org.spoutcraft.launcher.skin.components.HyperlinkJLabel;
@@ -62,10 +79,13 @@ import org.spoutcraft.launcher.skin.components.LoginFrame;
 import org.spoutcraft.launcher.technic.AddPack;
 import org.spoutcraft.launcher.technic.PackInfo;
 import org.spoutcraft.launcher.technic.RestInfo;
+import org.spoutcraft.launcher.technic.rest.RestAPI;
+import org.spoutcraft.launcher.technic.rest.RestNews;
 import org.spoutcraft.launcher.technic.skin.ImageButton;
 import org.spoutcraft.launcher.technic.skin.LauncherOptions;
 import org.spoutcraft.launcher.technic.skin.ModpackOptions;
 import org.spoutcraft.launcher.technic.skin.ModpackSelector;
+import org.spoutcraft.launcher.technic.skin.NewsBox;
 import org.spoutcraft.launcher.util.ImageUtils;
 import org.spoutcraft.launcher.util.OperatingSystem;
 import org.spoutcraft.launcher.util.ResourceUtils;
@@ -97,7 +117,7 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 	private ImageButton packOptionsBtn;
 	private ImageButton packRemoveBtn;
 	private ImageHyperlinkButton platform;
-	private JTextArea news;
+	private NewsBox[] news = new NewsBox[5];
 	private JLabel packShadow;
 	private JLabel customName;
 	private long previous = 0L;
@@ -163,29 +183,11 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		setIcon(logo, "logo.png", logo.getWidth(), logo.getHeight());
 
 		// News feed
-		news = new JTextArea() {
-			@Override
-			protected void paintComponent(Graphics g) {
-				g.setColor(news.getBackground());
-				g.fillRect(0, 0, news.getWidth(), news.getHeight());
-				super.paintComponent(g);
-			}
-		};
-
-		news.setBounds(220, logo.getY() + logo.getHeight() + 20, 640, 235);
-		news.setForeground(new Color(230, 230, 230));
-		news.setLineWrap(true);
-		news.setWrapStyleWord(true);
-		news.setFont(minecraft);
-		news.setBackground(new Color(0, 0, 0, 100));
-		news.setOpaque(false);
-
-		// News Scroll Pane
-		JScrollPane newsScroll = new JScrollPane(news);
-		newsScroll.setBounds(220, logo.getY() + logo.getHeight() + 20, 640, 235);
-		newsScroll.setBorder(null);
-		newsScroll.setOpaque(false);
-		newsScroll.getViewport().setOpaque(false);
+		for (int i = 0; i < 5; i++) {
+			NewsBox box = new NewsBox();
+			box.setBounds(210, logo.getHeight() + (55 * i), 660, 65);
+			news[i] = box;
+		}
 
 		// Pack Selector Background
 		JLabel selectorBackground = new JLabel();
@@ -364,6 +366,9 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 			userButtons.put(userName, userButton);
 		}
 
+		for (NewsBox box : news) {
+			contentPane.add(box);
+		}
 //		contentPane.add(switchLeft);
 //		contentPane.add(switchRight);
 		contentPane.add(customName);
@@ -383,7 +388,6 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 //		contentPane.add(forums);
 //		contentPane.add(donate);
 		contentPane.add(logo);
-		contentPane.add(newsScroll);
 		contentPane.add(loginStrip);
 		contentPane.add(options);
 		contentPane.add(exit);
@@ -401,16 +405,23 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		}
 	}
 
+	public void updateNews() {
+		try {
+			List<RestNews> restNews = RestAPI.getNews();
+			for (int i = 0; i < 5; i++) {
+				news[i].addNews(restNews.get(i));
+			}
+		} catch (RestfulAPIException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public ModpackSelector getSelector() {
 		return packSelector;
 	}
 	
 	public BackgroundImage getBackgroundImage() {
 		return packBackground;
-	}
-
-	public JTextArea getNews() {
-		return news;
 	}
 
 	public static ImageIcon getIcon(String iconName) {

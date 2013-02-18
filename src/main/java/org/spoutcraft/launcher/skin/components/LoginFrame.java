@@ -289,6 +289,18 @@ public abstract class LoginFrame extends JFrame implements DownloadListener {
 		return minecraft;
 	}
 
+	public static final Font getOtherFont(int size) {
+		Font minecraft;
+		try {
+			minecraft = Font.createFont(Font.TRUETYPE_FONT, getResourceAsStream("/org/spoutcraft/launcher/resources/RobotoCondensed-Regular.ttf")).deriveFont((float)size);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Fallback
+			minecraft = new Font("Arial", Font.PLAIN, 12);
+		}
+		return minecraft;
+	}
+
 	public final void handleException(Exception e) {
 		e.printStackTrace();
 		ErrorDialog dialog = new ErrorDialog(this, e);

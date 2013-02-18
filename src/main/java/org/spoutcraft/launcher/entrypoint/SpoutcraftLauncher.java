@@ -55,11 +55,9 @@ import org.spoutcraft.launcher.Settings;
 import org.spoutcraft.launcher.GameLauncher;
 import org.spoutcraft.launcher.StartupParameters;
 import org.spoutcraft.launcher.api.Launcher;
-import org.spoutcraft.launcher.exceptions.RestfulAPIException;
 import org.spoutcraft.launcher.skin.ConsoleFrame;
 import org.spoutcraft.launcher.skin.MetroLoginFrame;
 import org.spoutcraft.launcher.technic.PackManager;
-import org.spoutcraft.launcher.technic.rest.RestAPI;
 import org.spoutcraft.launcher.technic.skin.ModpackSelector;
 import org.spoutcraft.launcher.util.OperatingSystem;
 import org.spoutcraft.launcher.util.Utils;
@@ -158,12 +156,7 @@ public class SpoutcraftLauncher {
 		PackManager.loadPack(selector.getPackMap(), lastPack);
 
 		PackManager.addRestPacks(selector);
-
-		try {
-			RestAPI.getNews().get(0).updateNewsPane(frame.getNews());
-		} catch (RestfulAPIException e) {
-			e.printStackTrace();
-		}
+		frame.updateNews();
 
 		if (params.hasAccount()) {
 			frame.disableForm();
