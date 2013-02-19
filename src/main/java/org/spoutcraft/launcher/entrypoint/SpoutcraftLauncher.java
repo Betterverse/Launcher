@@ -152,10 +152,9 @@ public class SpoutcraftLauncher {
 		if (!Settings.getInstalledPacks().contains(lastPack)) {
 			lastPack = ModpackSelector.DEFAULT_PACK;
 		}
+		selector.addPack(PackManager.loadPack(selector.getPackMap(), lastPack));
 		selector.selectPack(lastPack);
-		PackManager.loadPack(selector.getPackMap(), lastPack);
 
-		PackManager.addRestPacks(selector);
 		frame.updateNews();
 
 		if (params.hasAccount()) {

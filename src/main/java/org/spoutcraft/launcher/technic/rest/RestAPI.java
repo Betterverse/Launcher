@@ -29,9 +29,9 @@ package org.spoutcraft.launcher.technic.rest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.apache.commons.io.IOUtils;
@@ -75,16 +75,9 @@ public class RestAPI {
 		}
 	}
 
-	public static Set<String> getDefaults() {
-//		Modpacks packs = getDefault().getModpacks();
-//		if (packs != null) {
-//			return packs.getMap().keySet();
-//		} else {
-//			return Collections.emptySet();
-//		}
-		Set<String> defaults = new HashSet<String>(1);
-		defaults.add("vanilla");
-		defaults.add("tekkitlite");
+	public static Map<String, String> getDefaults() {
+		HashMap<String, String> defaults = new HashMap<String, String>();
+		defaults.put("minecraft", "http://dl.betterver.se/launcher/packs/standard/standard.php");
 		return defaults;
 	}
 

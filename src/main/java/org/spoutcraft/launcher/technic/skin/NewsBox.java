@@ -12,7 +12,6 @@ import org.spoutcraft.launcher.technic.rest.RestNews;
 public class NewsBox extends JComponent {
 	private static final long serialVersionUID = 1L;
 
-	private static int HEIGHT = 40;
 	private JTextArea messageArea;
 	private LiteButton title;
 

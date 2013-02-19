@@ -51,7 +51,7 @@ import org.spoutcraft.launcher.util.Utils;
 public class ModpackSelector extends JComponent implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String PACK_SELECT_ACTION = "packselect";
-	public static final String DEFAULT_PACK = "vanilla";
+	public static final String DEFAULT_PACK = "minecraft";
 	private ImportOptions importOptions = null;
 
 	private final MetroLoginFrame frame;
@@ -151,6 +151,7 @@ public class ModpackSelector extends JComponent implements ActionListener {
 		boolean custom = Settings.isPackCustom(selected.getName());
 
 		// Set the background image based on the pack
+		System.out.println("Setting image for " + name);
 		frame.getBackgroundImage().changeBackground(name, new ImageIcon(selected.getBackground()));
 
 		// Set the icon image based on the pack

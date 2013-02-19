@@ -43,8 +43,8 @@ public class PackManager {
 		}
 
 		if (packs.size() < 1) {
-			for (String pack : RestAPI.getDefaults()) {
-				initPack(packs, pack);
+			for (String pack : RestAPI.getDefaults().keySet()) {
+				packs.put(pack, loadPack(packs, pack));
 			}
 		}
 	}
@@ -55,33 +55,20 @@ public class PackManager {
 	}
 
 	public static PackInfo loadPack(PackMap packs, String pack) {
-		RestAPI rest = RestAPI.getDefault();
-		boolean custom = Settings.isPackCustom(pack);
-
 		PackInfo loaded = packs.get(pack);
 		if (loaded != null && !loaded.isLoading()) {
 			return loaded;
 		}
 
 		try {
-			if (custom) {
-				CustomInfo info = RestAPI.getCustomModpack(RestAPI.getCustomPackURL(pack));
-				if (!info.hasMirror()) {
-					packs.add(info);
-					return info;
-				}
-
-				rest = new RestAPI(info.getMirrorURL());
-			}
-
-			RestInfo info = rest.getModpackInfo(pack);
+			CustomInfo info = RestAPI.getCustomModpack(RestAPI.getDefaults().get(pack));
 			return info;
 
 		} catch (RestfulAPIException e) {
 			if (Utils.getStartupParameters().isDebugMode()) {
-				Launcher.getLogger().log(Level.SEVERE, "Unable to load modpack " + pack + " from Technic Rest API", e);
+				Launcher.getLogger().log(Level.SEVERE, "Unable to load modpack " + pack + " from Rest API", e);
 			} else {
-				Launcher.getLogger().log(Level.SEVERE, "Unable to load modpack " + pack + " from Technic Rest API");
+				Launcher.getLogger().log(Level.SEVERE, "Unable to load modpack " + pack + " from Rest API");
 			}
 			PackInfo info = packs.get(pack);
 			if (info instanceof OfflineInfo) {
@@ -96,7 +83,7 @@ public class PackManager {
 		PackMap packs = selector.getPackMap();
 		int index = 0;
 
-		for (String pack : RestAPI.getDefaults()) {
+		for (String pack : RestAPI.getDefaults().keySet()) {
 			PackInfo info = loadPack(packs, pack);
 			packs.add(info);
 			packs.reorder(index, pack);
