@@ -209,7 +209,7 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 
 		// Progress Bar
 		progressBar = new LiteProgressBar();
-		progressBar.setBounds((FRAME_WIDTH / 2) - (395 / 2), 130, 395, 23);
+		progressBar.setBounds(logo.getX(), logo.getHeight() - 24, 395, 23);
 		progressBar.setVisible(false);
 		progressBar.setStringPainted(true);
 		progressBar.setOpaque(true);
