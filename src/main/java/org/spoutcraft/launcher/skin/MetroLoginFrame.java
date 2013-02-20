@@ -121,7 +121,6 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 	private JLabel packShadow;
 	private JLabel customName;
 	private long previous = 0L;
-	private boolean locked = false;
 
 	public MetroLoginFrame() {
 		initComponents();
@@ -505,14 +504,11 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		} else if (action.equals(PACK_RIGHT_ACTION)) {
 			getSelector().selectNextPack();
 		} else if (action.equals(LOGIN_ACTION)) {
-			if (locked) {
-				return;
-			}
 			PackInfo pack = getSelector().getSelectedPack();
 			if (pack instanceof AddPack) {
 				return;
 			}
-			lockLoginButton();
+			lockLoginButton(false);
 			String pass = new String(this.pass.getPassword());
 			if (getSelectedUser().length() > 0 && pass.length() > 0) {
 				this.doLogin(getSelectedUser(), pass);
@@ -606,14 +602,15 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 		customName.setText(packName);
 	}
 	
-	public void lockLoginButton() {
-		if (!locked) {
-			locked = true;
+	public void lockLoginButton(boolean unlock) {
+		if (unlock) {
+			login.setText("Login");
+		} else {
 			login.setText("Launching...");
-			login.setEnabled(false);
-			packRemoveBtn.setEnabled(false);
-			packOptionsBtn.setEnabled(false);
 		}
+		login.setEnabled(unlock);
+		packRemoveBtn.setEnabled(unlock);
+		packOptionsBtn.setEnabled(unlock);
 	}
 
 	public Image newBackgroundImage(RestInfo modpack) {
