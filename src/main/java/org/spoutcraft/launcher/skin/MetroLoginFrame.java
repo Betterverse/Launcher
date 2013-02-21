@@ -397,7 +397,7 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 
 	public void setUser(String name) {
 		if (name != null) {
-			DynamicButton user = userButtons.get(name);
+			DynamicButton user = userButtons.get(this.getUsername(name));
 			if (user != null) {
 				user.doClick();
 			}
@@ -508,9 +508,10 @@ public class MetroLoginFrame extends LoginFrame implements ActionListener, KeyLi
 			if (pack instanceof AddPack) {
 				return;
 			}
-			lockLoginButton(false);
+
 			String pass = new String(this.pass.getPassword());
 			if (getSelectedUser().length() > 0 && pass.length() > 0) {
+				lockLoginButton(false);
 				this.doLogin(getSelectedUser(), pass);
 				if (remember.isSelected()) {
 					saveUsername(getSelectedUser(), pass);
